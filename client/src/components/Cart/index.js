@@ -11,12 +11,14 @@ import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import './style.css';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
-const selectState = state => state;
+const selectState = state => state; //function to return the state (used for useSelector)
 
 const Cart = () => {
   // const [state, dispatch] = useStoreContext();
+  // instead of using GlobalState, use useSelector and useDispatch
   const state = useSelector(selectState);
   const dispatch = useDispatch();
+
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   useEffect(() => {

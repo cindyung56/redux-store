@@ -20,6 +20,8 @@ const initialState = {
   currentCategory: "",
 };
 
+// passed initialState as the initial state for when the application is first loaded
+// else it will take the state from the store whenever useSelector or useDispatch is called
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_PRODUCTS:
