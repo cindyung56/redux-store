@@ -9,16 +9,20 @@ import {
 import { QUERY_CATEGORIES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 
+const selectState = state => state;
+
 function CategoryMenu() {
   // const [state, dispatch] = useStoreContext();
+  const state = useSelector(selectState);
+  const dispatch = useDispatch();
 
-  const { categories } = store.getState();
+  const { categories } = state;
 
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
   useEffect(() => {
     if (categoryData) {
-      store.dispatch({
+      dispatch({
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories,
       });
@@ -27,16 +31,16 @@ function CategoryMenu() {
       });
     } else if (!loading) {
       idbPromise('categories', 'get').then((categories) => {
-        store.dispatch({
+        dispatch({
           type: UPDATE_CATEGORIES,
           categories: categories,
         });
       });
     }
-  }, [categoryData, loading, store.dispatch()]);
+  }, [categoryData, loading, dispatch]);
 
   const handleClick = (id) => {
-    store.dispatch({
+    dispatch({
       type: UPDATE_CURRENT_CATEGORY,
       currentCategory: id,
     });

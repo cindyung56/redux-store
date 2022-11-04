@@ -2,12 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { pluralize } from "../../utils/helpers"
 // import { useStoreContext } from "../../utils/GlobalState";
-import store from '../../utils/store';
+// import store from '../../utils/store';
+import {useSelector, useDispatch} from 'react-redux';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 
+const selectState = state => state;
+
 function ProductItem(item) {
   // const [state, dispatch] = useStoreContext();
+  const state = useSelector(selectState);
+  const dispatch = useDispatch();
 
   const {
     image,
@@ -17,12 +22,12 @@ function ProductItem(item) {
     quantity
   } = item;
 
-  const { cart } = store.getState();
+  const { cart } = state;
 
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === _id)
     if (itemInCart) {
-      store.dispatch({
+      dispatch({
         type: UPDATE_CART_QUANTITY,
         _id: _id,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
@@ -32,7 +37,7 @@ function ProductItem(item) {
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
       });
     } else {
-      store.dispatch({
+      dispatch({
         type: ADD_TO_CART,
         product: { ...item, purchaseQuantity: 1 }
       });

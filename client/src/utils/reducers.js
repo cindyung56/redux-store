@@ -11,6 +11,7 @@ import {
   TOGGLE_CART,
 } from "./actions";
 
+// created an initialState for when the application is first loaded
 const initialState = {
   products: [],
   cart: [],
@@ -46,7 +47,11 @@ const rootReducer = (state = initialState, action) => {
         cartOpen: true,
         cart: state.cart.map((product) => {
           if (action._id === product._id) {
-            product.purchaseQuantity = action.purchaseQuantity;
+            return { ...product, purchaseQuantity: action.purchaseQuantity }; 
+            // created a copy of the product state, and then edited the proper item quantity
+            
+            // OLD CODE: product.purchaseQuantity = action.purchaseQuantity; 
+            // this makes it mutuable, which can't be used in Redux
           }
           return product;
         }),
