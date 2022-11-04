@@ -20,6 +20,6 @@ Redux configureStore: [https://redux-toolkit.js.org/api/configureStore](https://
 
 ## Links
 
-Link to site:
+Link to site: [https://protected-chamber-30832.herokuapp.com](https://protected-chamber-30832.herokuapp.com)
 
 GitHub repository link: [https://github.com/cindyung56/redux-store](https://github.com/cindyung56/redux-store)
