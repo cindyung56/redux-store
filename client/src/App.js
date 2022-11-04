@@ -46,7 +46,7 @@ function App() {
             <Nav />
             <Routes>
               <Route 
-                path="*" 
+                path="/" 
                 element={<Home />} 
               />
               <Route 
